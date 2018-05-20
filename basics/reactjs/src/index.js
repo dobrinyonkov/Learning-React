@@ -9,14 +9,19 @@ class App extends React.Component {
 
         var user = {
             name: 'Ana',
-            age: 27
+            age: 27,
+            hobbies : [
+                "runnig",
+                "coding",
+                'eating'
+            ]
         }
         
         return (
             <div>
                 <Header user={user}/>
 
-                <Home />
+                <Home user={user}/>
             </div>
         );
     }
