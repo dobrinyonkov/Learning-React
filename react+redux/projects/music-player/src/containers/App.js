@@ -14,12 +14,9 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <div className="background-image" />
                     <div className="content">
                         <Header />
-                        <div className="container">
-                            <Main />
-                        </div>
+                        <Main />
                         {/* <Footer /> */}
                     </div>
                 </div>
@@ -31,7 +28,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        math: state.math
+        song: state.song
     };
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-
+import './Header.css'
 export class Header extends React.Component {
     render() {
         return (
@@ -39,13 +39,13 @@ export class Header extends React.Component {
             //         </form>
             //     </div>
             // </nav>
-            <div class="header masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand">Music Place</h3>
-                    <nav class="nav nav-masthead">
-                        <Link to='/'><a className="mx-3 nav-link active">Home</a></Link>
-                        <Link to='/player'><a className="mx-3 nav-link">Player</a></Link>
-                        <Link to='/'><a className="mx-3 nav-link">Home</a></Link>
+            <div className="header masthead clearfix">
+                <div className="inner">
+                    <h3 className="masthead-brand">Music Place</h3>
+                    <nav className="nav nav-masthead">
+                        <Link to='/'><p className="mx-3 nav-link active">Home</p></Link>
+                        <Link to='/player'><p className="mx-3 nav-link active">Player</p></Link>
+                        <Link to='/dashboard'><p className="mx-3 nav-link active">Dashboard</p></Link>
                     </nav>
                 </div>
             </div>

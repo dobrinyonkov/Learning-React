@@ -3,11 +3,23 @@ var express = require('express');
 var router = express.Router();
 const AWS = require('aws-sdk');
 
-const BUCKET_NAME = 'personal-music-player';
-const IAM_USER_KEY = 'AKIAIRLZIOBDP66BV66A';
-const IAM_USER_SECRET = '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';
+// var multer = require('multer');
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'public/uploads/')
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + file.originalname);
 
-function uploadToS3(file) {
+//     }
+// });
+// var upload = multer({ storage: storage });
+
+const BUCKET_NAME = 'personal-music-player';
+const IAM_USER_KEY = 'AKIAJPGRCZRV25GARG3Q';
+const IAM_USER_SECRET = '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';
+
+function uploadToS3(file, res, req) {
     let s3bucket = new AWS.S3({
         accessKeyId: IAM_USER_KEY,
         secretAccessKey: IAM_USER_SECRET,
@@ -22,18 +34,28 @@ function uploadToS3(file) {
             ContentType: 'audio/mp3'
         };
         s3bucket.upload(params, function (err, data) {
+            console.log(data);
             if (err) {
                 console.log('error in callback');
                 console.log(err);
             }
             console.log('success');
-            console.log(data);
+            var songsCollection = req.db.get('songs');
+            songsCollection.insert({ data })
+                .then(docs => {
+                    console.log(docs);
+                    res.status(200).json(docs);
+                }).catch(err => {
+                    res.status(400).json(err);
+                });
         });
     });
 }
 
 /* GET users listing. */
-router.post('/api/upload', function (req, res, next) {
+router.post('/api/upload', /* upload.any(),*/ function (req, res, next) {
+    // console.log(req.body);
+
     // This grabs the additional parameters so in this case passing     
     // in "element1" with a value.
     const element1 = req.body.element1;
@@ -56,9 +78,8 @@ router.post('/api/upload', function (req, res, next) {
         // }
         // Grabs your file object from the request.
         const file = req.files.element2;
-        console.log(file);
         // Begins the upload to the AWS S3
-        uploadToS3(file);
+        uploadToS3(file, res, req);
     });
     req.pipe(busboy);
 });
