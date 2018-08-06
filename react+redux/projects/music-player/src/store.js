@@ -8,5 +8,5 @@ import user from './reducers/userReducer';
 export default createStore(
     combineReducers({ song, user }),
     {},
-    applyMiddleware( thunk)
+    applyMiddleware(thunk)
 );

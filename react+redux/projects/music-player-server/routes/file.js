@@ -16,8 +16,8 @@ const AWS = require('aws-sdk');
 // var upload = multer({ storage: storage });
 
 const BUCKET_NAME = 'personal-music-player';
-const IAM_USER_KEY = 'AKIAJPGRCZRV25GARG3Q';
-const IAM_USER_SECRET = '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';
+const IAM_USER_KEY = 'AKIAJ7OAE5Y4YT7ODQIQ';
+const IAM_USER_SECRET = '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';
 
 function uploadToS3(file, res, req) {
     let s3bucket = new AWS.S3({
