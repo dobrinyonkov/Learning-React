@@ -14,12 +14,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var fileRouter = require('./routes/file');
 var songsRouter = require('./routes/songs');
+var playlistRouter = require('./routes/playlist');
 
 var app = express();
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
@@ -44,6 +45,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/file', fileRouter);
 app.use('/songs', songsRouter);
+app.use('/playlist', playlistRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

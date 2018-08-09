@@ -6,6 +6,7 @@ export function addSongs(files) {
             var fd = new FormData();
             fd.append('element1', 'test');
             fd.append('element2', element);
+            console.log(fd);
             promises.push(fetch('http://localhost:9000/file/api/upload', {
                 method: 'POST',
                 body: fd
