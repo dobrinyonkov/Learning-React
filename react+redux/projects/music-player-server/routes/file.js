@@ -4,8 +4,8 @@ var router = express.Router();
 const AWS = require('aws-sdk');
 
 const BUCKET_NAME = 'personal-music-player';
-const IAM_USER_KEY = 'AKIAINVPBNXFPV2YFWUA';
-const IAM_USER_SECRET = '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';
+const IAM_USER_KEY = 'AKIAJYEGF3LZGCTYJRRQ';
+const IAM_USER_SECRET = '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';
 
 function uploadToS3(file, res, req) {
     let s3bucket = new AWS.S3({
@@ -23,6 +23,7 @@ function uploadToS3(file, res, req) {
         };
         s3bucket.upload(params, function (err, data) {
             console.log(data);
+            data.playlists = [];
             if (err) {
                 console.log('error in callback');
                 console.log(err);
